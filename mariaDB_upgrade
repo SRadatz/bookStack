@@ -1,0 +1,31 @@
+#!/bin/sh
+
+#upgrade mariadb from 10.0 to 10.1
+
+#backup DB first
+#mysqldump db_name > backup-file.sql
+#mysqldump --all-databases > all_databases.sql
+
+#stop services
+sudo service nginx stop
+sudo service mysql stop
+
+#remove current version
+sudo apt remove maria-db server -y
+
+#setup mariadb repositories
+sudo apt-get install software-properties-common -y
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 -y
+sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu xenial main' -y
+
+sudo apt update
+sudo apt upgrade
+
+#reboot
+
+#incase of Unix_socket Error
+#sudo vim /etc/mysql.mariadb.conf.d/50-server.cnf
+#     Under [mysqld] section
+#     Plugin-load-add = auth_socket.so
+#sudo systemctl restart mariadb.service
+#     Now 'sudo mysql -u root' should work
