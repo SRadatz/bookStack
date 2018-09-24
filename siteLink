@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#generate key
+cd /var/www/BookStack
+sudo php artisan key:generate
+php artisan migrate
+
+#link file from sites enabled
+ln -s /etc/nginx/sites-available/bookstack /etc/nginx/sites-enabled/default
+#restart nginx
+systemctl restart nginx

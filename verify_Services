@@ -31,3 +31,10 @@ sudo git clone https://github.com/BookStackApp/BookStack.git --branch release --
 #Install PHP dependencies
 cd /var/www/BookStack/
 sudo composer install -y
+
+#change ownership of BookStack to 'www-data'
+sudo chown -R www-data:www-data /var/wwww/BookStack
+
+#copy bookstack config file
+cd /var/www/BookStack/
+sudo cp .env.example .env
