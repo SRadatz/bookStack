@@ -12,4 +12,8 @@ systemctl enable nginx
 
 sudo apt install php-fpm php-mcrypt php-curl php-cli php-mysql php-gd php-xsl php-json php-intl php-pear php-dev php-common php-mbstring php-tidy php-zip php-soap libcurl3 curl -y
 
-sudo apt install mariadb-server mariadb
+sudo apt install mariadb-server mariadb-client -y
+systemctl start mysql
+systemctl enable mysql
+
+sudo apt install git -y
